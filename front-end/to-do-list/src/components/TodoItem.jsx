@@ -5,28 +5,32 @@ const TodoItem = ({ todo, editTodo, deleteTodo }) => {
   const [updatedTodo, setUpdatedTodo] = useState({ name: todo.name, cost: todo.cost, dueDate: todo.dueDate });
 
   const handleUpdate = () => {
+    if (!updatedTodo.name.trim()) {
+      alert('O nome da tarefa não pode estar vazio.');
+      return;
+    }
     editTodo(todo.id, updatedTodo);
     setIsEditing(false);
   };
 
   return (
-    <div style={{ background: todo.cost >= 1000 ? 'yellow' : 'white' }}>
+    <div style={{ background: todo.cost >= 1000 ? 'yellow' : 'white', padding: '10px', margin: '5px 0' }}>
       {isEditing ? (
         <>
-          <input 
-            type="text" 
-            value={updatedTodo.name} 
-            onChange={(e) => setUpdatedTodo({ ...updatedTodo, name: e.target.value })} 
+          <input
+            type="text"
+            value={updatedTodo.name}
+            onChange={(e) => setUpdatedTodo({ ...updatedTodo, name: e.target.value })}
           />
-          <input 
-            type="number" 
-            value={updatedTodo.cost} 
-            onChange={(e) => setUpdatedTodo({ ...updatedTodo, cost: parseFloat(e.target.value) })} 
+          <input
+            type="number"
+            value={updatedTodo.cost}
+            onChange={(e) => setUpdatedTodo({ ...updatedTodo, cost: parseFloat(e.target.value) })}
           />
-          <input 
-            type="date" 
-            value={updatedTodo.dueDate} 
-            onChange={(e) => setUpdatedTodo({ ...updatedTodo, dueDate: e.target.value })} 
+          <input
+            type="date"
+            value={updatedTodo.dueDate}
+            onChange={(e) => setUpdatedTodo({ ...updatedTodo, dueDate: e.target.value })}
           />
           <button onClick={handleUpdate}>Salvar</button>
           <button onClick={() => setIsEditing(false)}>Cancelar</button>
