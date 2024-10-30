@@ -7,8 +7,17 @@ const AddTodoForm = ({ addTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !cost || !dueDate) return; // Verifica se todos os campos estão preenchidos
+    
+    
+    if (!name || !cost || !dueDate) {
+      alert("Por favor, preencha todos os campos.");
+      return; 
+    }
+
+    // Chama a função addTodo com os dados da nova tarefa
     addTodo({ name, cost: Number(cost), dueDate });
+
+    // Limpa os campos do formulário
     setName('');
     setCost('');
     setDueDate('');
